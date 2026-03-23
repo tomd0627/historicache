@@ -1,5 +1,6 @@
 "use client";
 
+import { Compass } from "lucide-react";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -44,7 +45,7 @@ export default function LoginPage() {
     <div className="h-full flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <span className="text-5xl">🧭</span>
+          <Compass size={48} strokeWidth={1.5} className="mx-auto text-forest-600 dark:text-forest-400" />
           <h1 className="font-serif text-2xl font-semibold mt-3 text-stone-900 dark:text-stone-100">
             Sign in to HistoriCache
           </h1>

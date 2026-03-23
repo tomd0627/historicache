@@ -1,3 +1,4 @@
+import { Check, Landmark, Map as MapIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -61,7 +62,7 @@ export default async function ProfilePage() {
 
       {visitedSites.length === 0 ? (
         <div className="text-center py-12 text-stone-400">
-          <p className="text-3xl mb-3">🗺</p>
+          <MapIcon size={32} strokeWidth={1.5} className="mx-auto mb-3 text-stone-400" />
           <p>No sites collected yet.</p>
           <Link href="/" className="inline-flex items-center gap-1 text-sm font-medium px-4 py-1.5 rounded-full bg-forest-600 hover:bg-forest-700 text-white mt-3 transition-colors">
             Explore the map →
@@ -87,8 +88,8 @@ export default async function ProfilePage() {
                       className="rounded-lg object-cover shrink-0"
                     />
                   ) : (
-                    <div className="w-14 h-14 rounded-lg bg-stone-100 dark:bg-stone-800 shrink-0 flex items-center justify-center text-xl">
-                      🏛
+                    <div className="w-14 h-14 rounded-lg bg-stone-100 dark:bg-stone-800 shrink-0 flex items-center justify-center text-stone-400">
+                      <Landmark size={24} strokeWidth={1.5} />
                     </div>
                   )}
                   <div className="min-w-0">
@@ -97,7 +98,7 @@ export default async function ProfilePage() {
                       {new Date(checkin.checked_in_at).toLocaleDateString()} · {site.points_value} pts
                     </p>
                   </div>
-                  <span className="ml-auto text-forest-500 shrink-0">✓</span>
+                  <Check size={16} strokeWidth={2.5} className="ml-auto text-forest-500 shrink-0" />
                 </Link>
               </li>
             );

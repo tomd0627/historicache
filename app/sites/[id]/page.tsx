@@ -1,3 +1,4 @@
+import { MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -68,7 +69,7 @@ export default async function SitePage({ params }: Props) {
       )}
 
       <div className="text-xs text-stone-400 mb-8">
-        📍 {site.lat.toFixed(5)}, {site.lng.toFixed(5)}
+        <MapPin size={12} strokeWidth={2} className="inline mr-1 text-stone-400" />{site.lat.toFixed(5)}, {site.lng.toFixed(5)}
       </div>
 
       {user ? (

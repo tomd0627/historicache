@@ -1,5 +1,6 @@
 "use client";
 
+import { Check } from "lucide-react";
 import { useState } from "react";
 import { distanceMeters } from "@/lib/geo";
 import { createClient } from "@/lib/supabase/client";
@@ -84,7 +85,7 @@ export default function CheckInButton({ site, alreadyVisited }: Props) {
     return (
       <div className="flex flex-col items-center gap-2">
         <div className="w-full py-3 rounded-xl bg-forest-100 dark:bg-forest-900/40 text-forest-700 dark:text-forest-300 font-semibold text-center">
-          ✓ Visited
+          <Check size={16} strokeWidth={2.5} className="inline mr-1.5" />Visited
         </div>
         {message && status === "success" && (
           <p className="text-sm text-forest-600 dark:text-forest-400">{message}</p>

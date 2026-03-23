@@ -1,5 +1,6 @@
 "use client";
 
+import { Compass } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -46,7 +47,7 @@ export default function ScoreDisplay() {
 
   return (
     <span className="flex items-center gap-1.5 bg-forest-100 text-forest-800 dark:bg-forest-900/40 dark:text-forest-200 px-3 py-1 rounded-full text-sm font-semibold">
-      <span>🧭</span>
+      <Compass size={14} strokeWidth={2} />
       <span>{score} pts</span>
     </span>
   );

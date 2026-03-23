@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
+/* Use class-based dark mode so the toggle works alongside system preference */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #faf9f6;
   --foreground: #1c1917;
+}
+
+html.dark {
+  --background: #171310;
+  --foreground: #f0ede8;
 }
 
 @theme inline {
@@ -40,6 +48,11 @@ body {
 /* Ensure Leaflet renders above base content but below our nav */
 .leaflet-container {
   z-index: 0;
+}
+
+/* Dark mode map tiles — invert OSM tiles to a dark style without losing detail */
+.dark .leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }
 
 /* Custom popup chrome — higher specificity beats Leaflet's single-class rules */
