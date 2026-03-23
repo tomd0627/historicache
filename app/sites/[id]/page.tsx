@@ -43,6 +43,8 @@ export default async function SitePage({ params }: Props) {
             src={site.photo_url}
             alt={site.name}
             fill
+            priority
+            sizes="(max-width: 640px) 100vw, 512px"
             className="object-cover"
           />
         </div>

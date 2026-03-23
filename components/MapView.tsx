@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import type { Site } from "@/lib/supabase/types";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { LocateFixed } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import type { Site } from "@/lib/supabase/types";
 
 function pinIcon(color: string) {
   return L.divIcon({
@@ -24,14 +24,38 @@ function pinIcon(color: string) {
 const visitedIcon = pinIcon("#2f5d44");   // forest-600
 const unvisitedIcon = pinIcon("#a8a29e"); // stone-400
 
-function LocationCenter() {
+function LocateButton() {
   const map = useMap();
-  useEffect(() => {
+  function locate() {
     navigator.geolocation?.getCurrentPosition((pos) => {
       map.setView([pos.coords.latitude, pos.coords.longitude], 13);
     });
-  }, [map]);
-  return null;
+  }
+  return (
+    <div className="leaflet-bottom leaflet-right" style={{ marginBottom: "80px" }}>
+      <div className="leaflet-control leaflet-bar">
+        <button
+          type="button"
+          onClick={locate}
+          title="Go to my location"
+          aria-label="Go to my location"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "30px",
+            height: "30px",
+            background: "white",
+            cursor: "pointer",
+            border: "none",
+            fontSize: "16px",
+          }}
+        >
+          <LocateFixed size={16} strokeWidth={1.75} />
+        </button>
+      </div>
+    </div>
+  );
 }
 
 type Props = {
@@ -51,7 +75,7 @@ export default function MapView({ sites, visitedIds }: Props) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <LocationCenter />
+      <LocateButton />
       {sites.map((site) => (
         <Marker
           key={site.id}
@@ -66,6 +90,7 @@ export default function MapView({ sites, visitedIds }: Props) {
                   alt={site.name}
                   width={208}
                   height={112}
+                  sizes="208px"
                   className="w-full object-cover"
                 />
               )}

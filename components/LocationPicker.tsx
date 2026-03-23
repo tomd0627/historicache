@@ -5,11 +5,15 @@ import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-lea
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+const markerIcon = L.divIcon({
+  html: `<svg width="28" height="36" viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 0C6.268 0 0 6.268 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.268 21.732 0 14 0z" fill="#2f5d44"/>
+    <circle cx="14" cy="14" r="6" fill="white" fill-opacity="0.9"/>
+  </svg>`,
+  className: "",
+  iconSize: [28, 36],
+  iconAnchor: [14, 36],
+  popupAnchor: [0, -38],
 });
 
 function ClickHandler({ onSelect }: { onSelect: (lat: number, lng: number) => void }) {
@@ -60,7 +64,7 @@ export default function LocationPicker({ onSelect, selectedLat, selectedLng }: P
       <ClickHandler onSelect={onSelect} />
       {selectedLat !== null && selectedLng !== null && (
         <>
-          <Marker position={[selectedLat, selectedLng]} />
+          <Marker position={[selectedLat, selectedLng]} icon={markerIcon} />
           <PanTo lat={selectedLat} lng={selectedLng} />
         </>
       )}

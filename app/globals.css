@@ -45,6 +45,10 @@ body {
   font-family: var(--font-sans, Arial, sans-serif);
 }
 
+button:not(:disabled) {
+  cursor: pointer;
+}
+
 /* Ensure Leaflet renders above base content but below our nav */
 .leaflet-container {
   z-index: 0;

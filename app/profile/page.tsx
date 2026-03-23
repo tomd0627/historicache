@@ -85,6 +85,7 @@ export default async function ProfilePage() {
                       alt={site.name}
                       width={56}
                       height={56}
+                      sizes="56px"
                       className="rounded-lg object-cover shrink-0"
                     />
                   ) : (
