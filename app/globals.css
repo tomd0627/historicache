@@ -1,20 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf9f6;
+  --foreground: #1c1917;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist);
+  --font-serif: var(--font-lora), Georgia, "Times New Roman", serif;
+
+  --color-forest-50:  #f0f5f2;
+  --color-forest-100: #d5e8db;
+  --color-forest-200: #aacfb6;
+  --color-forest-300: #7aaf92;
+  --color-forest-400: #538f6f;
+  --color-forest-500: #3d7558;
+  --color-forest-600: #2f5d44;
+  --color-forest-700: #234733;
+  --color-forest-800: #183023;
+  --color-forest-900: #0e1d15;
+  --color-forest-950: #060e0a;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #030712;
-    --foreground: #f9fafb;
+    --background: #171310;
+    --foreground: #f0ede8;
   }
 }
 
@@ -27,4 +40,40 @@ body {
 /* Ensure Leaflet renders above base content but below our nav */
 .leaflet-container {
   z-index: 0;
+}
+
+/* Custom popup chrome — higher specificity beats Leaflet's single-class rules */
+.leaflet-container .leaflet-popup-content-wrapper {
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  border: none;
+}
+.leaflet-container .leaflet-popup-content {
+  margin: 0;
+  width: auto;
+  line-height: normal;
+}
+.leaflet-container .leaflet-popup-tip-container {
+  display: none;
+}
+/* Reset Leaflet's default link color inside popups so our button styles show correctly */
+.leaflet-container .leaflet-popup-content a {
+  color: inherit;
+}
+
+.leaflet-container .leaflet-popup .leaflet-popup-close-button {
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  color: #1c1917;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  padding: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }

@@ -13,8 +13,12 @@ create table if not exists public.sites (
   lng double precision not null,
   points_value integer not null default 10,
   created_by uuid references auth.users(id) on delete set null,
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  ai_history text
 );
+
+-- Migration for existing databases:
+-- alter table public.sites add column if not exists ai_history text;
 
 -- Check-ins: one per user per site
 create table if not exists public.checkins (

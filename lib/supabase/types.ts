@@ -8,6 +8,7 @@ export type Site = {
   points_value: number;
   created_by: string | null;
   created_at: string;
+  ai_history: string | null;
 };
 
 export type Checkin = {
@@ -39,6 +40,7 @@ export type Database = {
           points_value?: number;
           created_by?: string | null;
           created_at?: string;
+          ai_history?: string | null;
         };
         Update: {
           id?: string;
@@ -50,6 +52,7 @@ export type Database = {
           points_value?: number;
           created_by?: string | null;
           created_at?: string;
+          ai_history?: string | null;
         };
         Relationships: [];
       };

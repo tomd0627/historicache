@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { distanceMeters } from "@/lib/geo";
+import { createClient } from "@/lib/supabase/client";
 import type { Site } from "@/lib/supabase/types";
 
 const CHECKIN_RADIUS_M = 100;
@@ -83,11 +83,11 @@ export default function CheckInButton({ site, alreadyVisited }: Props) {
   if (visited) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <div className="w-full py-3 rounded-xl bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 font-semibold text-center">
+        <div className="w-full py-3 rounded-xl bg-forest-100 dark:bg-forest-900/40 text-forest-700 dark:text-forest-300 font-semibold text-center">
           ✓ Visited
         </div>
         {message && status === "success" && (
-          <p className="text-sm text-green-600 dark:text-green-400">{message}</p>
+          <p className="text-sm text-forest-600 dark:text-forest-400">{message}</p>
         )}
       </div>
     );
@@ -96,9 +96,10 @@ export default function CheckInButton({ site, alreadyVisited }: Props) {
   return (
     <div className="flex flex-col items-center gap-2">
       <button
+        type="button"
         onClick={handleCheckIn}
         disabled={status === "loading"}
-        className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full py-3 rounded-xl bg-forest-600 hover:bg-forest-700 active:bg-forest-800 text-white font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {status === "loading" ? "Locating you…" : "Check In Here"}
       </button>
@@ -107,7 +108,7 @@ export default function CheckInButton({ site, alreadyVisited }: Props) {
           className={`text-sm text-center ${
             status === "error"
               ? "text-red-600 dark:text-red-400"
-              : "text-green-600 dark:text-green-400"
+              : "text-forest-600 dark:text-forest-400"
           }`}
         >
           {message}

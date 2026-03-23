@@ -45,8 +45,8 @@ export default function ScoreDisplay() {
   if (score === null) return null;
 
   return (
-    <span className="flex items-center gap-1 bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200 px-3 py-1 rounded-full text-sm font-semibold">
-      <span>🏛</span>
+    <span className="flex items-center gap-1.5 bg-forest-100 text-forest-800 dark:bg-forest-900/40 dark:text-forest-200 px-3 py-1 rounded-full text-sm font-semibold">
+      <span>🧭</span>
       <span>{score} pts</span>
     </span>
   );

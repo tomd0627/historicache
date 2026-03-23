@@ -44,19 +44,21 @@ export default function LoginPage() {
     <div className="h-full flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <span className="text-5xl">🏛</span>
-          <h1 className="text-2xl font-bold mt-3">Sign in to Historicache</h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <span className="text-5xl">🧭</span>
+          <h1 className="font-serif text-2xl font-semibold mt-3 text-stone-900 dark:text-stone-100">
+            Sign in to Historicache
+          </h1>
+          <p className="text-stone-500 text-sm mt-1">
             We&apos;ll send you a magic link — no password needed.
           </p>
         </div>
 
         {sent ? (
-          <div className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center">
-            <p className="text-green-700 dark:text-green-300 font-medium">
+          <div className="bg-forest-50 dark:bg-forest-900/30 border border-forest-200 dark:border-forest-800 rounded-xl p-6 text-center">
+            <p className="text-forest-700 dark:text-forest-300 font-medium">
               Check your email!
             </p>
-            <p className="text-green-600 dark:text-green-400 text-sm mt-1">
+            <p className="text-forest-600 dark:text-forest-400 text-sm mt-1">
               We sent a magic link to <strong>{email}</strong>.
             </p>
           </div>
@@ -65,7 +67,7 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              className="w-full py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold text-sm transition-colors flex items-center justify-center gap-3"
+              className="w-full py-3 rounded-xl border border-stone-300 dark:border-stone-600 bg-background hover:bg-stone-100 dark:hover:bg-stone-800 font-semibold text-sm transition-colors flex items-center justify-center gap-3"
             >
               <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -76,10 +78,10 @@ export default function LoginPage() {
               Sign in with Google
             </button>
 
-            <div className="flex items-center gap-3 text-gray-400 text-xs">
-              <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+            <div className="flex items-center gap-3 text-stone-400 text-xs">
+              <div className="flex-1 h-px bg-stone-200 dark:bg-stone-700" />
               or
-              <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+              <div className="flex-1 h-px bg-stone-200 dark:bg-stone-700" />
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -89,7 +91,7 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 required
-                className="w-full border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+                className="w-full border border-stone-300 dark:border-stone-600 rounded-xl px-4 py-3 bg-background focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm"
               />
               {error && (
                 <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
@@ -97,7 +99,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full py-3 rounded-xl bg-forest-600 hover:bg-forest-700 text-white font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loading ? "Sending…" : "Send magic link"}
               </button>

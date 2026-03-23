@@ -1,6 +1,7 @@
-import { createClient } from "@/lib/supabase/server";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -33,13 +34,13 @@ export default async function ProfilePage() {
     <div className="max-w-lg mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold">Your Profile</h1>
-          <p className="text-sm text-gray-500 mt-0.5 truncate max-w-50 sm:max-w-none">{user.email}</p>
+          <h1 className="font-serif text-2xl font-semibold text-stone-900 dark:text-stone-100">Your Profile</h1>
+          <p className="text-sm text-stone-400 mt-0.5 truncate max-w-50 sm:max-w-none">{user.email}</p>
         </div>
         <form action={signOut}>
           <button
             type="submit"
-            className="text-sm text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
+            className="text-sm text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors"
           >
             Sign out
           </button>
@@ -47,22 +48,22 @@ export default async function ProfilePage() {
       </div>
 
       {/* Score card */}
-      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6 mb-8 text-center">
-        <p className="text-5xl font-bold text-amber-600 dark:text-amber-400">{score}</p>
-        <p className="text-sm text-amber-700 dark:text-amber-300 mt-1">total points</p>
-        <p className="text-xs text-amber-500 mt-2">
+      <div className="bg-stone-100 dark:bg-stone-900/50 border border-stone-200 dark:border-stone-700 rounded-2xl p-6 mb-8 text-center">
+        <p className="text-5xl font-bold text-forest-600 dark:text-forest-400">{score}</p>
+        <p className="text-sm text-stone-500 dark:text-stone-400 mt-1">total points</p>
+        <p className="text-xs text-stone-400 mt-2">
           {visitedSites.length} {visitedSites.length === 1 ? "site" : "sites"} visited
         </p>
       </div>
 
       {/* Visited sites list */}
-      <h2 className="font-semibold text-lg mb-4">Collected Sites</h2>
+      <h2 className="font-serif font-semibold text-lg mb-4 text-stone-800 dark:text-stone-200">Collected Sites</h2>
 
       {visitedSites.length === 0 ? (
-        <div className="text-center py-12 text-gray-400">
+        <div className="text-center py-12 text-stone-400">
           <p className="text-3xl mb-3">🗺</p>
           <p>No sites collected yet.</p>
-          <Link href="/" className="text-amber-500 hover:underline text-sm mt-2 inline-block">
+          <Link href="/" className="inline-flex items-center gap-1 text-sm font-medium px-4 py-1.5 rounded-full bg-forest-600 hover:bg-forest-700 text-white mt-3 transition-colors">
             Explore the map →
           </Link>
         </div>
@@ -75,26 +76,28 @@ export default async function ProfilePage() {
               <li key={checkin.id}>
                 <Link
                   href={`/sites/${site.id}`}
-                  className="flex items-center gap-4 p-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-colors"
+                  className="flex items-center gap-4 p-3 rounded-xl border border-stone-200 dark:border-stone-800 hover:border-forest-300 dark:hover:border-forest-700 transition-colors"
                 >
                   {site.photo_url ? (
-                    <img
+                    <Image
                       src={site.photo_url}
                       alt={site.name}
-                      className="w-14 h-14 rounded-lg object-cover shrink-0"
+                      width={56}
+                      height={56}
+                      className="rounded-lg object-cover shrink-0"
                     />
                   ) : (
-                    <div className="w-14 h-14 rounded-lg bg-gray-100 dark:bg-gray-800 shrink-0 flex items-center justify-center text-xl">
+                    <div className="w-14 h-14 rounded-lg bg-stone-100 dark:bg-stone-800 shrink-0 flex items-center justify-center text-xl">
                       🏛
                     </div>
                   )}
                   <div className="min-w-0">
-                    <p className="font-medium truncate">{site.name}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">
+                    <p className="font-medium truncate text-stone-800 dark:text-stone-200">{site.name}</p>
+                    <p className="text-xs text-stone-400 mt-0.5">
                       {new Date(checkin.checked_in_at).toLocaleDateString()} · {site.points_value} pts
                     </p>
                   </div>
-                  <span className="ml-auto text-green-500 shrink-0">✓</span>
+                  <span className="ml-auto text-forest-500 shrink-0">✓</span>
                 </Link>
               </li>
             );

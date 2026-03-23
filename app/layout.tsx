@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { Lora } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import ScoreDisplay from "@/components/ScoreDisplay";
+import UserMenu from "@/components/UserMenu";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
+const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
 
 export const metadata: Metadata = {
   title: "Historicache — Discover History Near You",
@@ -19,12 +22,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   } = await supabase.auth.getUser();
 
   return (
-    <html lang="en" className={`${geist.variable} h-full`}>
-      <body className="h-full flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased">
-        <header className="shrink-0 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center justify-between z-50">
-          <Link href="/" className="font-bold text-lg tracking-tight flex items-center gap-2 shrink-0">
-            <span>🏛</span>
-            <span className="hidden sm:inline">Historicache</span>
+    <html lang="en" className={`${geist.variable} ${lora.variable} h-full`}>
+      <body className="h-full flex flex-col bg-[var(--background)] text-[var(--foreground)] antialiased">
+        <header className="shrink-0 border-b border-stone-200 dark:border-stone-800 bg-[var(--background)] px-4 py-3 flex items-center justify-between z-50">
+          <Link href="/" className="flex items-center gap-2 shrink-0 group">
+            <span className="text-lg">🧭</span>
+            <span className="hidden sm:inline font-serif font-semibold text-lg tracking-tight text-stone-800 dark:text-stone-100 group-hover:text-forest-600 dark:group-hover:text-forest-400 transition-colors">
+              Historicache
+            </span>
           </Link>
           <nav className="flex items-center gap-2 sm:gap-3">
             {user ? (
@@ -32,22 +37,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <ScoreDisplay />
                 <Link
                   href="/add"
-                  className="text-sm px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors whitespace-nowrap"
+                  className="text-sm px-3 py-1.5 rounded-lg bg-forest-600 hover:bg-forest-700 text-white font-medium transition-colors whitespace-nowrap"
                 >
                   <span className="sm:hidden">+</span>
                   <span className="hidden sm:inline">+ Add Site</span>
                 </Link>
-                <Link
-                  href="/profile"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hidden sm:inline"
-                >
-                  Profile
-                </Link>
+                <UserMenu email={user.email ?? ""} />
               </>
             ) : (
               <Link
                 href="/auth/login"
-                className="text-sm px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
+                className="text-sm px-3 py-1.5 rounded-lg bg-forest-600 hover:bg-forest-700 text-white font-medium transition-colors"
               >
                 Sign in
               </Link>

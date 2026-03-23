@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -31,6 +31,18 @@ function AutoCenter() {
   return null;
 }
 
+function PanTo({ lat, lng }: { lat: number; lng: number }) {
+  const map = useMap();
+  const hasPanned = useRef(false);
+  useEffect(() => {
+    if (!hasPanned.current) {
+      hasPanned.current = true;
+      map.setView([lat, lng], 15);
+    }
+  }, [map, lat, lng]);
+  return null;
+}
+
 type Props = {
   onSelect: (lat: number, lng: number) => void;
   selectedLat: number | null;
@@ -47,7 +59,10 @@ export default function LocationPicker({ onSelect, selectedLat, selectedLng }: P
       <AutoCenter />
       <ClickHandler onSelect={onSelect} />
       {selectedLat !== null && selectedLng !== null && (
-        <Marker position={[selectedLat, selectedLng]} />
+        <>
+          <Marker position={[selectedLat, selectedLng]} />
+          <PanTo lat={selectedLat} lng={selectedLng} />
+        </>
       )}
     </MapContainer>
   );

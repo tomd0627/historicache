@@ -1,43 +1,28 @@
 "use client";
 
 import { useEffect } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMap,
-} from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import Image from "next/image";
 import Link from "next/link";
 import type { Site } from "@/lib/supabase/types";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
-// Fix default icon paths broken by webpack
-delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-});
+function pinIcon(color: string) {
+  return L.divIcon({
+    html: `<svg width="28" height="36" viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 0C6.268 0 0 6.268 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.268 21.732 0 14 0z" fill="${color}"/>
+      <circle cx="14" cy="14" r="6" fill="white" fill-opacity="0.9"/>
+    </svg>`,
+    className: "",
+    iconSize: [28, 36],
+    iconAnchor: [14, 36],
+    popupAnchor: [0, -38],
+  });
+}
 
-const goldIcon = new L.Icon({
-  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-const greyIcon = new L.Icon({
-  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
+const visitedIcon = pinIcon("#2f5d44");   // forest-600
+const unvisitedIcon = pinIcon("#a8a29e"); // stone-400
 
 function LocationCenter() {
   const map = useMap();
@@ -71,25 +56,31 @@ export default function MapView({ sites, visitedIds }: Props) {
         <Marker
           key={site.id}
           position={[site.lat, site.lng]}
-          icon={visitedIds.has(site.id) ? goldIcon : greyIcon}
+          icon={visitedIds.has(site.id) ? visitedIcon : unvisitedIcon}
         >
-          <Popup>
-            <div className="min-w-40">
+          <Popup minWidth={200}>
+            <div className="w-52">
               {site.photo_url && (
-                <img
+                <Image
                   src={site.photo_url}
                   alt={site.name}
-                  className="w-full h-24 object-cover rounded mb-2"
+                  width={208}
+                  height={112}
+                  className="w-full object-cover"
                 />
               )}
-              <p className="font-semibold text-sm">{site.name}</p>
-              <p className="text-xs text-gray-500 mb-2">{site.points_value} pts</p>
-              <Link
-                href={`/sites/${site.id}`}
-                className="block text-sm text-amber-600 font-medium hover:underline py-1"
-              >
-                View details →
-              </Link>
+              <div className="px-3 py-2.5">
+                <p className="font-semibold text-sm text-stone-800 leading-tight mb-2">{site.name}</p>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-forest-100 text-forest-700">{site.points_value} pts</span>
+                  <Link
+                    href={`/sites/${site.id}`}
+                    className="inline-flex items-center text-xs font-semibold px-3 py-1 rounded-full border border-forest-600 text-forest-700 hover:bg-forest-50 transition-colors"
+                  >
+                    View details →
+                  </Link>
+                </div>
+              </div>
             </div>
           </Popup>
         </Marker>
