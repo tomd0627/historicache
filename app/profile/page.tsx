@@ -34,7 +34,7 @@ export default async function ProfilePage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold">Your Profile</h1>
-          <p className="text-sm text-gray-500 mt-0.5">{user.email}</p>
+          <p className="text-sm text-gray-500 mt-0.5 truncate max-w-50 sm:max-w-none">{user.email}</p>
         </div>
         <form action={signOut}>
           <button

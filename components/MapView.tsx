@@ -74,7 +74,7 @@ export default function MapView({ sites, visitedIds }: Props) {
           icon={visitedIds.has(site.id) ? goldIcon : greyIcon}
         >
           <Popup>
-            <div className="min-w-[160px]">
+            <div className="min-w-40">
               {site.photo_url && (
                 <img
                   src={site.photo_url}
@@ -86,7 +86,7 @@ export default function MapView({ sites, visitedIds }: Props) {
               <p className="text-xs text-gray-500 mb-2">{site.points_value} pts</p>
               <Link
                 href={`/sites/${site.id}`}
-                className="text-xs text-amber-600 font-medium hover:underline"
+                className="block text-sm text-amber-600 font-medium hover:underline py-1"
               >
                 View details →
               </Link>

@@ -22,23 +22,24 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" className={`${geist.variable} h-full`}>
       <body className="h-full flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased">
         <header className="shrink-0 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center justify-between z-50">
-          <Link href="/" className="font-bold text-lg tracking-tight flex items-center gap-2">
+          <Link href="/" className="font-bold text-lg tracking-tight flex items-center gap-2 shrink-0">
             <span>🏛</span>
-            <span>Historicache</span>
+            <span className="hidden sm:inline">Historicache</span>
           </Link>
-          <nav className="flex items-center gap-3">
+          <nav className="flex items-center gap-2 sm:gap-3">
             {user ? (
               <>
                 <ScoreDisplay />
                 <Link
                   href="/add"
-                  className="text-sm px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
+                  className="text-sm px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors whitespace-nowrap"
                 >
-                  + Add Site
+                  <span className="sm:hidden">+</span>
+                  <span className="hidden sm:inline">+ Add Site</span>
                 </Link>
                 <Link
                   href="/profile"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hidden sm:inline"
                 >
                   Profile
                 </Link>
