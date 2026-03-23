@@ -74,8 +74,21 @@ $$;
 
 -- ============================================================
 -- Storage bucket for site photos
--- Run these in Dashboard > Storage, or via the API:
---   1. Create a public bucket named "site-photos"
---   2. Add an upload policy for authenticated users:
---      (bucket_id = 'site-photos' AND auth.role() = 'authenticated')
+-- Create a public bucket named "site-photos" in Dashboard > Storage,
+-- then run the policies below.
 -- ============================================================
+
+create policy "authenticated upload"
+on storage.objects for insert
+to authenticated
+with check (bucket_id = 'site-photos');
+
+create policy "public read"
+on storage.objects for select
+to public
+using (bucket_id = 'site-photos');
+
+create policy "owner delete"
+on storage.objects for delete
+to authenticated
+using (bucket_id = 'site-photos' and auth.uid()::text = (storage.foldername(name))[1]);
