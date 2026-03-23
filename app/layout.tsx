@@ -11,7 +11,7 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
 
 export const metadata: Metadata = {
-  title: "Historicache — Discover History Near You",
+  title: "HistoriCache — Discover History Near You",
   description: "Geocaching for historical sites. Explore, visit, and collect historic places.",
 };
 
@@ -28,7 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Link href="/" className="flex items-center gap-2 shrink-0 group">
             <span className="text-lg">🧭</span>
             <span className="hidden sm:inline font-serif font-semibold text-lg tracking-tight text-stone-800 dark:text-stone-100 group-hover:text-forest-600 dark:group-hover:text-forest-400 transition-colors">
-              Historicache
+              HistoriCache
             </span>
           </Link>
           <nav className="flex items-center gap-2 sm:gap-3">

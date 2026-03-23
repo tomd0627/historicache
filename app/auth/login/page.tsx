@@ -18,7 +18,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
       },
     });
 
@@ -35,7 +35,7 @@ export default function LoginPage() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
       },
     });
   }
@@ -46,7 +46,7 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <span className="text-5xl">🧭</span>
           <h1 className="font-serif text-2xl font-semibold mt-3 text-stone-900 dark:text-stone-100">
-            Sign in to Historicache
+            Sign in to HistoriCache
           </h1>
           <p className="text-stone-500 text-sm mt-1">
             We&apos;ll send you a magic link — no password needed.
