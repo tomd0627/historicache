@@ -5,6 +5,7 @@ import "leaflet/dist/leaflet.css";
 import { LocateFixed } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import type { Site } from "@/lib/supabase/types";
 
@@ -31,6 +32,11 @@ function LocateButton() {
       map.setView([pos.coords.latitude, pos.coords.longitude], 13);
     });
   }
+  useEffect(() => {
+    navigator.geolocation?.getCurrentPosition((pos) => {
+      map.setView([pos.coords.latitude, pos.coords.longitude], 13);
+    });
+  }, [map]);
   return (
     <div className="leaflet-bottom leaflet-right" style={{ marginBottom: "80px" }}>
       <div className="leaflet-control leaflet-bar">
