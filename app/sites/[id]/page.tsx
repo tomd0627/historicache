@@ -44,6 +44,7 @@ export default async function SitePage({ params }: Props) {
             alt={site.name}
             fill
             priority
+            quality={85}
             sizes="(max-width: 640px) 100vw, 512px"
             className="object-cover"
           />
