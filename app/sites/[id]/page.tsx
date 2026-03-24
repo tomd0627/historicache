@@ -52,7 +52,7 @@ export default async function SitePage({ params }: Props) {
 
       <div className="flex items-start justify-between gap-4 mb-4">
         <h1 className="font-serif text-2xl font-semibold text-stone-900 dark:text-stone-100">{site.name}</h1>
-        <span className="shrink-0 text-sm font-semibold bg-forest-100 dark:bg-forest-900/40 text-forest-700 dark:text-forest-300 px-3 py-1 rounded-full">
+        <span className="shrink-0 text-sm font-semibold bg-forest-100 dark:bg-forest-700/50 text-forest-700 dark:text-forest-100 px-3 py-1 rounded-full">
           {site.points_value} pts
         </span>
       </div>
@@ -70,8 +70,8 @@ export default async function SitePage({ params }: Props) {
         </div>
       )}
 
-      <div className="text-xs text-stone-400 mb-8">
-        <MapPin size={12} strokeWidth={2} className="inline mr-1 text-stone-400" />{site.lat.toFixed(5)}, {site.lng.toFixed(5)}
+      <div className="text-sm text-stone-500 mb-8">
+        <MapPin size={13} strokeWidth={2} className="inline mr-1" />{site.lat.toFixed(5)}, {site.lng.toFixed(5)}
       </div>
 
       {user ? (

@@ -46,7 +46,7 @@ export default function ScoreDisplay() {
   if (score === null) return null;
 
   return (
-    <span className="flex items-center gap-1.5 bg-forest-100 text-forest-800 dark:bg-forest-900/40 dark:text-forest-200 px-3 py-1 rounded-full text-sm font-semibold">
+    <span className="flex items-center gap-1.5 bg-forest-100 text-forest-800 dark:bg-forest-700/50 dark:text-forest-100 px-3 py-1 rounded-full text-sm font-semibold">
       <Compass size={14} strokeWidth={2} />
       <span>{score} pts</span>
     </span>

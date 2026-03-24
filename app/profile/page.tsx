@@ -41,7 +41,7 @@ export default async function ProfilePage() {
         <form action={signOut}>
           <button
             type="submit"
-            className="text-sm text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors"
+            className="text-sm px-3 py-1.5 rounded-lg bg-forest-600 hover:bg-forest-700 text-white font-medium transition-colors"
           >
             Sign out
           </button>

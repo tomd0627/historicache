@@ -45,17 +45,7 @@ function LocateButton() {
           onClick={locate}
           title="Go to my location"
           aria-label="Go to my location"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "30px",
-            height: "30px",
-            background: "white",
-            cursor: "pointer",
-            border: "none",
-            fontSize: "16px",
-          }}
+          className="flex items-center justify-center w-7.5 h-7.5 bg-white dark:bg-stone-800 dark:text-white cursor-pointer border-none"
         >
           <LocateFixed size={16} strokeWidth={1.75} />
         </button>
@@ -101,12 +91,12 @@ export default function MapView({ sites, visitedIds }: Props) {
                 />
               )}
               <div className="px-3 py-2.5">
-                <p className="font-semibold text-sm text-stone-800 leading-tight mb-2">{site.name}</p>
+                <p className="font-semibold text-base text-stone-800 dark:text-stone-100 leading-tight mb-2">{site.name}</p>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-forest-100 text-forest-700">{site.points_value} pts</span>
+                  <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-forest-100 dark:bg-forest-700/50 text-forest-700 dark:text-forest-100">{site.points_value} pts</span>
                   <Link
                     href={`/sites/${site.id}`}
-                    className="inline-flex items-center text-xs font-semibold px-3 py-1 rounded-full border border-forest-600 text-forest-700 hover:bg-forest-50 transition-colors"
+                    className="inline-flex items-center text-xs font-semibold px-3 py-1 rounded-full border border-forest-600 text-forest-700 dark:text-forest-300 hover:bg-forest-50 dark:hover:bg-forest-900/40 transition-colors"
                   >
                     View details →
                   </Link>

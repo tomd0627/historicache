@@ -49,6 +49,13 @@ button:not(:disabled) {
   cursor: pointer;
 }
 
+/* Prevent iOS Safari from zooming on input focus (requires font-size >= 16px) */
+@media (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px;
+  }
+}
+
 /* Ensure Leaflet renders above base content but below our nav */
 .leaflet-container {
   z-index: 0;
@@ -79,6 +86,10 @@ button:not(:disabled) {
 .leaflet-container .leaflet-popup-content a {
   color: inherit;
 }
+.dark .leaflet-container .leaflet-popup-content a {
+  color: #7aaf92; /* forest-300 */
+  border-color: #538f6f; /* forest-400 */
+}
 
 .leaflet-container .leaflet-popup .leaflet-popup-close-button {
   top: 8px;
@@ -93,4 +104,15 @@ button:not(:disabled) {
   text-align: center;
   padding: 0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Dark mode popup */
+.dark .leaflet-container .leaflet-popup-content-wrapper {
+  background: #292524; /* stone-800 */
+  color: #f5f5f4; /* stone-100 */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+.dark .leaflet-container .leaflet-popup .leaflet-popup-close-button {
+  background: #44403c; /* stone-700 */
+  color: #f5f5f4;
 }

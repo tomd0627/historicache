@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { ImagePlus, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -40,6 +41,21 @@ export default function AddSiteForm() {
   const [aiHistory, setAiHistory] = useState<string | null>(null);
   const [aiStatus, setAiStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const fileRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  function autoResize() {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }
+
+  useEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }, [description]);
 
   async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -172,12 +188,12 @@ export default function AddSiteForm() {
           )}
         </label>
         <textarea
+          ref={textareaRef}
           id="site-description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows={3}
+          onChange={(e) => { setDescription(e.target.value); autoResize(); }}
           placeholder="A bit of history about this place…"
-          className="w-full border border-stone-300 dark:border-stone-600 rounded-lg px-3 py-2 bg-background focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm resize-none"
+          className="w-full border border-stone-300 dark:border-stone-600 rounded-lg px-3 py-2 bg-background focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm resize-none overflow-hidden min-h-20"
         />
       </div>
 
@@ -200,9 +216,9 @@ export default function AddSiteForm() {
             <button
               type="button"
               onClick={() => { setFile(null); setPreview(null); setAiHistory(null); setAiStatus("idle"); if (fileRef.current) fileRef.current.value = ""; }}
-              className="absolute top-2 right-2 bg-black/60 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+              className="absolute top-2 right-2 bg-black/60 text-white rounded-full w-6 h-6 flex items-center justify-center"
             >
-              ✕
+              <X size={12} strokeWidth={2.5} />
             </button>
           </div>
         ) : (
@@ -211,7 +227,7 @@ export default function AddSiteForm() {
             onClick={() => fileRef.current?.click()}
             className="w-full h-32 border-2 border-dashed border-stone-300 dark:border-stone-600 rounded-lg flex flex-col items-center justify-center text-stone-400 hover:border-forest-400 hover:text-forest-500 transition-colors"
           >
-            <span className="text-2xl mb-1">📷</span>
+            <ImagePlus size={24} strokeWidth={1.75} className="mb-1" />
             <span className="text-sm">Click to upload a photo</span>
           </button>
         )}

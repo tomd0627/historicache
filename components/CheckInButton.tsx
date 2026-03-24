@@ -84,7 +84,7 @@ export default function CheckInButton({ site, alreadyVisited }: Props) {
   if (visited) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <div className="w-full py-3 rounded-xl bg-forest-100 dark:bg-forest-900/40 text-forest-700 dark:text-forest-300 font-semibold text-center">
+        <div className="w-full py-3 rounded-xl bg-forest-100 dark:bg-forest-700/50 text-forest-700 dark:text-forest-100 font-semibold text-center">
           <Check size={16} strokeWidth={2.5} className="inline mr-1.5" />Visited
         </div>
         {message && status === "success" && (
