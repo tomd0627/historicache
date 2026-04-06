@@ -25,15 +25,6 @@ function ClickHandler({ onSelect }: { onSelect: (lat: number, lng: number) => vo
   return null;
 }
 
-function AutoCenter() {
-  const map = useMap();
-  useEffect(() => {
-    navigator.geolocation?.getCurrentPosition((pos) => {
-      map.setView([pos.coords.latitude, pos.coords.longitude], 14);
-    });
-  }, [map]);
-  return null;
-}
 
 function PanTo({ lat, lng }: { lat: number; lng: number }) {
   const map = useMap();
@@ -60,7 +51,6 @@ export default function LocationPicker({ onSelect, selectedLat, selectedLng }: P
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <AutoCenter />
       <ClickHandler onSelect={onSelect} />
       {selectedLat !== null && selectedLng !== null && (
         <>

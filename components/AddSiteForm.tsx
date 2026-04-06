@@ -40,8 +40,20 @@ export default function AddSiteForm() {
   const [error, setError] = useState<string | null>(null);
   const [aiHistory, setAiHistory] = useState<string | null>(null);
   const [aiStatus, setAiStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [gpsPinned, setGpsPinned] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const manuallyPinned = useRef(false);
+
+  useEffect(() => {
+    navigator.geolocation?.getCurrentPosition((pos) => {
+      if (!manuallyPinned.current) {
+        setLat(pos.coords.latitude);
+        setLng(pos.coords.longitude);
+        setGpsPinned(true);
+      }
+    });
+  }, []);
 
   function autoResize() {
     const el = textareaRef.current;
@@ -80,8 +92,8 @@ export default function AddSiteForm() {
         if (data.name && !name.trim()) setName(data.name);
         // Pre-fill description (AI-generated, user can edit)
         setDescription(data.history);
-        // Auto-pin location if AI recognised the site and user hasn't pinned yet
-        if (data.lat && data.lng && lat === null) {
+        // Auto-pin location if AI recognised the site and user hasn't manually pinned
+        if (data.lat && data.lng && !manuallyPinned.current) {
           setLat(data.lat);
           setLng(data.lng);
         }
@@ -250,12 +262,16 @@ export default function AddSiteForm() {
         </p>
         <div className="h-64 rounded-lg overflow-hidden border border-stone-300 dark:border-stone-600">
           <LocationPicker
-            onSelect={(l, g) => { setLat(l); setLng(g); }}
+            onSelect={(l, g) => { manuallyPinned.current = true; setGpsPinned(false); setLat(l); setLng(g); }}
             selectedLat={lat}
             selectedLng={lng}
           />
         </div>
-        <p className="text-xs text-stone-400 mt-1">Click the map to pin the site location.</p>
+        <p className="text-xs text-stone-400 mt-1">
+          {gpsPinned
+            ? "Pinned to your current location — click the map to adjust."
+            : "Click the map to pin the site location."}
+        </p>
       </div>
 
       {error && (
