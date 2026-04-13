@@ -56,12 +56,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   <UserMenu email={user.email ?? ""} />
                 </>
               ) : (
-                <Link
-                  href="/auth/login"
-                  className="text-sm px-3 py-1.5 rounded-lg bg-forest-600 hover:bg-forest-700 text-white font-medium transition-colors"
-                >
-                  Sign in
-                </Link>
+                <>
+                  <Link
+                    href="/auth/login?next=/add"
+                    className="hidden sm:inline-flex text-sm px-3 py-1.5 rounded-lg border border-forest-600 text-forest-700 dark:text-forest-400 hover:bg-forest-50 dark:hover:bg-forest-900/40 font-medium transition-colors whitespace-nowrap"
+                  >
+                    Add a site
+                  </Link>
+                  <Link
+                    href="/auth/login"
+                    className="text-sm px-3 py-1.5 rounded-lg bg-forest-600 hover:bg-forest-700 text-white font-medium transition-colors"
+                  >
+                    Sign in
+                  </Link>
+                </>
               )}
             </nav>
           </header>

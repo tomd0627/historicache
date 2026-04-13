@@ -9,6 +9,7 @@ export type Site = {
   created_by: string | null;
   created_at: string;
   ai_history: string | null;
+  is_demo?: true;
 };
 
 export type Checkin = {

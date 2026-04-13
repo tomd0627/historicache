@@ -18,6 +18,14 @@ export default function CheckInButton({ site, alreadyVisited }: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
 
+  if (site.is_demo) {
+    return (
+      <p className="text-sm text-center text-amber-700 dark:text-amber-400 py-2">
+        This is a demo site — find real historical sites near you to check in!
+      </p>
+    );
+  }
+
   async function handleCheckIn() {
     setStatus("loading");
     setMessage(null);

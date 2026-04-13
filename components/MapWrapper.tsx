@@ -15,8 +15,10 @@ const MapView = dynamic(() => import("./MapView"), {
 type Props = {
   sites: Site[];
   visitedIds: Set<string>;
+  defaultCenter?: [number, number];
+  defaultZoom?: number;
 };
 
-export default function MapWrapper({ sites, visitedIds }: Props) {
-  return <MapView sites={sites} visitedIds={visitedIds} />;
+export default function MapWrapper({ sites, visitedIds, defaultCenter, defaultZoom }: Props) {
+  return <MapView sites={sites} visitedIds={visitedIds} defaultCenter={defaultCenter} defaultZoom={defaultZoom} />;
 }

@@ -11,17 +11,19 @@ export default function NavigateSection({ site }: Props) {
   const [navigating, setNavigating] = useState(false);
   const [userPos, setUserPos] = useState<[number, number] | null>(null);
   const [distance, setDistance] = useState<number | null>(null);
+  const [gpsError, setGpsError] = useState(false);
   const watchIdRef = useRef<number | null>(null);
 
   function startNavigation() {
     setNavigating(true);
+    setGpsError(false);
     watchIdRef.current = navigator.geolocation.watchPosition(
       (pos) => {
         const coords: [number, number] = [pos.coords.latitude, pos.coords.longitude];
         setUserPos(coords);
         setDistance(distanceMeters(pos.coords.latitude, pos.coords.longitude, site.lat, site.lng));
       },
-      () => {},
+      () => { setGpsError(true); stopNavigation(); },
       { enableHighAccuracy: true }
     );
   }
@@ -45,13 +47,20 @@ export default function NavigateSection({ site }: Props) {
 
   if (!navigating) {
     return (
-      <button
-        type="button"
-        onClick={startNavigation}
-        className="w-full py-3 rounded-xl border border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-300 font-semibold hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors"
-      >
-        Navigate to Site
-      </button>
+      <div className="flex flex-col gap-2">
+        <button
+          type="button"
+          onClick={startNavigation}
+          className="w-full py-3 rounded-xl border border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-300 font-semibold hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors"
+        >
+          Navigate to Site
+        </button>
+        {gpsError && (
+          <p className="text-sm text-center text-red-600 dark:text-red-400">
+            Location access denied. Enable GPS to navigate.
+          </p>
+        )}
+      </div>
     );
   }
 
