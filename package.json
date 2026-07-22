@@ -9,15 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.110.0",
-    "@supabase/ssr": "^0.12.0",
-    "@supabase/supabase-js": "^2.110.0",
+    "@anthropic-ai/sdk": "^0.113.0",
+    "@supabase/ssr": "^0.12.3",
+    "@supabase/supabase-js": "^2.110.8",
     "@types/leaflet": "^1.9.21",
     "leaflet": "^1.9.4",
-    "lucide-react": "^1.23.0",
-    "next": "^16.2.10",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "lucide-react": "^1.25.0",
+    "next": "^16.2.11",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-leaflet": "^5.0.0"
   },
   "browserslist": [
@@ -28,12 +28,12 @@
   ],
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^26.1.0",
+    "@types/node": "^26.1.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^10.6.0",
-    "eslint-config-next": "^16.2.10",
+    "eslint": "^10.7.0",
+    "eslint-config-next": "^16.2.11",
     "tailwindcss": "^4",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
